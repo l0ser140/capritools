@@ -9,7 +9,7 @@ include("config.php");
 //Get item list
 if((time() - 86400) > filemtime("itemscache") || isset($_GET['debug'])) {
 	include("ships.php");
-	$db = new PDO('mysql:host='.$mysql_host.';dbname='.$mysql_db.';charset=utf8', $mysql_user, $mysql_pass);
+	$db = new PDO('mysql:host='.$mysql_host.';dbname='.$mysql_static_db.';charset=utf8', $mysql_user, $mysql_pass);
 	$st = $db->prepare("SELECT invTypes.typeID, typeName, volume, groupName, metaGroupID, marketGroupID FROM `invTypes` 
 JOIN invGroups ON invGroups.groupID = invTypes.groupID
 RIGHT JOIN invMetaTypes ON invMetaTypes.typeID = invTypes.typeID

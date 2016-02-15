@@ -1,18 +1,22 @@
 <?php
 
 function distanceToMeters($dist, $unit) {
+        $dist = str_replace(" ", "", $dist);
 	$dist = str_replace(",", "", $dist);
 
 	switch($unit) {
 		case "m":
+                case "м":
 			return $dist;
 			break;
 			
 		case "km":
+                case "км":
 			return 1000 * $dist;
 			break;
 			
 		case "AU":
+                case "а.е.":
 			return 149597870700 * floatval($dist);
 			break;
 			
@@ -34,7 +38,7 @@ function parseDscan($dscan) {
 	//Iterate through our rows
 	foreach($rows as $row) {
 		//Check if it matches a dscan row format
-		if(preg_match("/^([^\t]+)\t([^\t]+)\t(([0-9,.]+) (km|m|AU)|-)/", $row, $matches) == 1) {
+		if(preg_match("/^([^\t]+)\t([^\t]+)\t((.+) (км|м|а\.е\.|km|m|AU)|-)/", $row, $matches) == 1) {
 			$ob['type'] = $matches[2];
 			$ob['name'] = $matches[1];
 			
@@ -65,7 +69,12 @@ function saveHit() {
 	//Create scan entry
 	$st = $db->prepare("INSERT INTO pageHits (`date`, `ip`, `referrer`, `page`) VALUES (UNIX_TIMESTAMP(), :ip, :referrer, :page)");
 	$st->bindValue(":ip", $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
-	$st->bindValue(":referrer", $_SERVER['HTTP_REFERER'], PDO::PARAM_STR);
+        if ($_SERVER['HTTP_REFERER']) {
+            $st->bindValue(":referrer", $_SERVER['HTTP_REFERER'], PDO::PARAM_STR);
+        }
+        else {
+            $st->bindValue(":referrer", "", PDO::PARAM_STR);
+        };
 	$st->bindValue(":page", $_SERVER["REQUEST_URI"], PDO::PARAM_STR);
 	$st->execute();
 }
@@ -89,7 +98,7 @@ function saveDscan($dscan) {
 	
 	//Get id and create key
 	$id = $db->lastInsertId();
-	$key = sha1("cloakypilgrim" . $id);
+	$key = sha1("bestpony" . $id);
 	$st = $db->prepare("UPDATE dscanScans SET `key`=:key WHERE id=:id LIMIT 1");
 	$st->bindValue(":key", $key, PDO::PARAM_STR);
 	$st->bindValue(":id", $id, PDO::PARAM_INT);
@@ -112,7 +121,7 @@ function saveDscan($dscan) {
 	}
 	
 	//Execute the dump
-	$st->execute($values);
+	$st->execute();
 	
 	return $key;
 }
@@ -269,7 +278,7 @@ function getDscanLocation($key) {
 	
 	foreach($rows as $row) {
 		$st = $db->prepare("SELECT * FROM gates WHERE itemName=:name AND typeName=:type");
-		$st->bindValue(":name", $row['name'], PDO::PARAM_STR);
+		$st->bindValue(":name", "Stargate (".$row['name'].")", PDO::PARAM_STR);
 		$st->bindValue(":type", $row['type'], PDO::PARAM_STR);
 		$st->execute();
 		$r = $st->fetchAll(PDO::FETCH_ASSOC);
@@ -550,7 +559,7 @@ function towerChecker($key) {
 	
 	//Get towers
 	$id = $rows[0]['id'];
-	$st = $db->prepare("SELECT count(*) as towers FROM dscanObjects INNER JOIN oceanus.invTypes on oceanus.invTypes.typeName=dscanObjects.type WHERE `scan`=:scan AND groupID = 365");
+	$st = $db->prepare("SELECT count(*) as towers FROM dscanObjects INNER JOIN eve_static_dump.invTypes on eve_static_dump.invTypes.typeName=dscanObjects.type WHERE `scan`=:scan AND groupID = 365");
 	$st->bindValue(":scan", $id, PDO::PARAM_STR);
 	$st->execute();
 	$rows = $st->fetchAll(PDO::FETCH_ASSOC);

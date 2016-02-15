@@ -1,6 +1,6 @@
 <?php
 include("../config.php");
-$db = new PDO('mysql:host='.$mysql_host.';dbname=oceanus;charset=utf8', $mysql_user, $mysql_pass);
+$db = new PDO('mysql:host='.$mysql_host.';dbname='.$mysql_db.';charset=utf8', $mysql_user, $mysql_pass);
 
 function isk($isk) {
 	return number_format($isk, 2, '.', ',') . " ISK";
@@ -63,7 +63,8 @@ for($i = 0; $i < count($rows); $i++) {
 
 ?>
 <head>
-	<meta charset="utf-8">
+    <title>EVE Tools - Quickmath - Implant Sets</title>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">

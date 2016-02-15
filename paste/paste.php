@@ -6,7 +6,8 @@ $paste = getPaste($_GET['key']);
 $info = getPasteInfo($_GET['key']);
 ?>
 <head>
-	<meta charset="utf-8">
+    <title>EVE Tools - Pastebin - viewing paste</title>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -54,7 +55,7 @@ $info = getPasteInfo($_GET['key']);
 			<h1>Pastebin Tool</h1>
 				<pre id="data" class="content-area" ondblclick="fnSelect('data');"><? echo htmlspecialchars($paste); ?></pre>
 				<div>
-					<span class="text-muted"><?php echo strlen($paste); ?> characters | <?php echo mb_strlen($paste); ?> bytes</span><br />
+					<span class="text-muted"><?php echo mb_strlen($paste); ?> characters | <?php echo strlen($paste); ?> bytes</span><br />
 					<span class="text-muted">Created: <?php echo date("d/m/y H:i", $info['created']); ?></span>
 				</div>
 	</div>

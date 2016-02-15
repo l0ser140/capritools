@@ -1,4 +1,8 @@
 <?php
+mb_internal_encoding('UTF-8');
+mb_http_output('UTF-8');
+mb_http_input('UTF-8');
+mb_regex_encoding('UTF-8'); 
 
 
 function savePaste($data) {
@@ -13,20 +17,22 @@ function savePaste($data) {
 	
 	//Get id and create key
 	$id = $db->lastInsertId();
-	$key = sha1("grrrrfalcons" . $id);
+	$key = sha1("bestpony" . $id);
 	$st = $db->prepare("UPDATE pastes SET `key`=:key WHERE id=:id LIMIT 1");
 	$st->bindValue(":key", $key, PDO::PARAM_STR);
 	$st->bindValue(":id", $id, PDO::PARAM_INT);
 	$st->execute();
 	
 	//Save data segments
-	$data = str_split($data, 1024);
-	for($i = 0; $i < count($data); $i++) {
+        $data = str_replace("\r\n", "\n", $data);
+        $seq = 0;
+	for($pos = 0; $pos < mb_strlen($data); $pos += 1024) {
 		$st = $db->prepare("INSERT INTO pasteData(`id`, `sequence`, `data`) VALUES (:id, :sequence, :data)");
-		$st->bindValue(":id", $id);
-		$st->bindValue(":sequence", $i);
-		$st->bindValue(":data", $data[$i]);
+		$st->bindValue(":id", $id, PDO::PARAM_INT);
+		$st->bindValue(":sequence", $seq, PDO::PARAM_INT);
+		$st->bindValue(":data", mb_substr($data, $pos, 1024), PDO::PARAM_STR);
 		$st->execute();
+                $seq++;
 	}
 	
 	return $key;

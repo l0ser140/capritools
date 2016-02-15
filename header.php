@@ -13,6 +13,10 @@
 	$p['name'] = "Pastebin";
 	$p['href'] = "/paste";
 	$pages[] = $p;
+        
+        $p['name'] = "Fatigue";
+	$p['href'] = "/fatigue";
+	$pages[] = $p;
 	
 	$p['name'] = "Shopping";
 	$p['href'] = "/shopping";
@@ -21,6 +25,7 @@
 	$p['name'] = "Quickmath";
 	$p['href'] = "/quickmath";
 	$pages[] = $p;
+        
 	
 $active = "";
 foreach($pages as $p) {
@@ -29,16 +34,6 @@ foreach($pages as $p) {
 	}
 }
 ?>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35688470-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
 <nav class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -48,7 +43,7 @@ foreach($pages as $p) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">Capri's Tools</a>
+          <a class="navbar-brand">Eve Tools</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

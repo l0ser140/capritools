@@ -1,18 +1,3 @@
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-	<!-- Latest compiled and minified CSS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<?php include("../switcher.php"); ?>
-	<link rel="stylesheet" href="/dscan/css/custom.css">
-	<!-- Optional theme -->
-	<!-- Latest compiled and minified JavaScript -->
-</head>
 <?php
 include("functions.php");
 $key = $_GET['key'];
@@ -51,8 +36,10 @@ if($location != null) {
 			"<a href=\"http://evemaps.dotlan.net/map/" . $regionName . "/" . $constellationName . "\">" . $loc['constellationName'] . "</a> &lt; " .
 			"<a href=\"http://evemaps.dotlan.net/map/" . $regionName . "\">" . $loc['regionName'] . "</a>";
 	}
+        $located = $loc['systemName'];
 } else {
 	$location = "Unknown";
+        $located=false;
 }
 
 //Tower
@@ -64,6 +51,23 @@ if($towerurl == null) {
 	$tower = "<a class=\"btn btn-success\" style=\"margin-bottom: 10px;\" href=\"".$towerurl."\">Tower Detected On-grid</a>";
 }
 ?>
+<head>
+    <title>EVE Tools - Dscan - viewing scan<?php if($located) {echo " [".$located."]";};?></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="theme-color" content="#2C3E50">
+
+	<!-- Latest compiled and minified CSS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<?php include("../switcher.php"); ?>
+	<link rel="stylesheet" href="/dscan/css/custom.css">
+	<!-- Optional theme -->
+	<!-- Latest compiled and minified JavaScript -->
+</head>
 <body>
 	<?php include("../header.php"); ?>
 
