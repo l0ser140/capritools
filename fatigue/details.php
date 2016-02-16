@@ -8,7 +8,6 @@
     <meta name="author" content="kiu Nakamura">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="shortcut icon" href="favicon.png">
     <title>EVE Tools - Fatigue Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <?php include("../switcher.php"); ?>
@@ -35,7 +34,7 @@
 
 	<h3>Calculation</h3>
 	<p><b>Cooldown (minutes)</b> = Max ( fatigue / 10, 1 + ( distance in lightyears * ( 1 - bonus ) ) )</p>
-	<p><b>Fatigue (minutes)</b> = Min ( 60 * 24 * 30, Max ( fatigue, 10 ) * ( 1 + ( distance in lightyears * ( 1 - bonus ) ) ) )</p>
+	<p><b>Fatigue (minutes)</b> = Min ( 60 * 24 * 5, Max ( fatigue, 10 ) * ( 1 + ( distance in lightyears * ( 1 - bonus ) ) ) )</p>
 	<p><small>Be aware that there is <b>no benefit</b> in waiting for fatigue to decay <b>below 10 minutes</b></small></p>
 
 	<h3>Bonus</h3>

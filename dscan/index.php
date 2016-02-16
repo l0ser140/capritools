@@ -48,9 +48,10 @@ if(isset($_POST['dscan'])) {
 					<fieldset>
 					  <i><legend>Paste your dscan into the box below</legend></i>
 					  <div class="form-group">
-							<textarea id="dscan" name="dscan" class="form-control" rows="8"><? if(isset($_POST['dscan'])) { echo $_POST['dscan']; } ?></textarea><br />
+                                              <textarea id="dscan" name="dscan" class="form-control" rows="10" placeholder="Directional Scan"><? if(isset($_POST['dscan'])) { echo $_POST['dscan']; } ?></textarea><br />
 						
 							<button type="submit" class="btn btn-primary">Submit</button>
+                                          </div>
 					</fieldset>
 				</form>
 			</p>

@@ -38,7 +38,7 @@ if(isset($_POST['paste'])) {
 					<fieldset>
 					  <i><legend>Paste your text into the box below</legend></i>
 					  <div class="form-group">
-							<textarea id="paste" name="paste" class="form-control mono" rows="10"></textarea><br />
+                                              <textarea id="paste" name="paste" class="form-control mono" rows="10"></textarea><br />
 						
 							<button type="submit" class="btn btn-primary">Submit</button>
 					</fieldset>

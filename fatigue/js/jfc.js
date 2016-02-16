@@ -224,10 +224,8 @@ function recalc() {
 
     for (i=2; i < 10; i++) {
 	$("#result-" + i + "-cooldown").html(toTime(cooldown));
-	traveltime += cooldown;
-	fatigue -= cooldown;
-
-	wait = refreshInputTime('#wait-' + i, 0, Math.ceil(fatigue - 10));
+        
+	wait = refreshInputTime('#wait-' + i, Math.ceil(cooldown), Math.ceil(fatigue - 10));
 	traveltime += wait;
 	fatigue -= wait;
 	$("#result-" + i + "-fatigue-before").html(toTime(fatigue));

@@ -43,10 +43,14 @@ if(isset($_POST['paste']) && isset($_POST['system'])) {
 			<h1>Localscan Tool</h1>
 			<p class="lead">
 				<form method="POST">
+                                        <fieldset>
 					<i><legend>Paste your local/fleet scan into the box below</legend></i>
+                                        <div class="form-group">
+                                        <input id="system" name="system" class="typeahead form-control" type="text" placeholder="System (Optional)"/><br />
 					<textarea id="paste" name="paste" class="form-control" rows="8" placeholder="Local Scan"></textarea><br />
-					<input id="system" name="system" class="typeahead form-control" type="text" placeholder="System (Optional)"/>
-					<input type="submit" style="margin-top: 16px;" class="btn btn-lg btn-primary"></input>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                        </fieldset>
 				</form>
 			</p>
 	</div>

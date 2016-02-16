@@ -2,6 +2,10 @@
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
+textarea {
+    resize: none;
+}
+
 .evelogo {
 	border-radius: 3px 3px 3px 3px;
 	-moz-border-radius: 3px 3px 3px 3px;
