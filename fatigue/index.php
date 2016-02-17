@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -9,10 +10,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>EVE Tools - Fatigue Calculator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <?php include("../switcher.php"); ?>
-    <link rel="stylesheet" href="/dscan/css/custom.css">
-  </head>
+    <link rel="stylesheet" href="/fatigue/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fatigue/css/typeahead.css">
+    <link rel="stylesheet" href="/fatigue/css/custom.css">
+</head>
 
 <body>
 
@@ -20,9 +22,6 @@
 <br>
 <!-- Content -->
     <div class="container">
-
-
-
 	<span id="option-travel" style="font-size:140%;">
 	    <label>I travel by </label>
 	    <button id="option-travel-1" class="btn btn-default btn-sm" onclick="selectTravel = 1; readjust();"><b>using a Jumpbridge</b></button>
@@ -100,10 +99,12 @@
 		    </td>
 		    <td class="text-center">
 			<br>
-			<input id="distance-1-input" style="display: inline;" onchange="recalc();" onkeyup="recalc();" type="range" min="0" max="0" step="0.01">
+                        <input id="start-1-input" type="text" class="form-control text-right tt-input typeahead" onchange="system_changed();" placeholder="From">
+			<input id="distance-1-input" style="display: inline;" onchange="slider_changed();"  type="range" min="0" max="0" step="0.01">
 			    <span id="distance-1-min" class="pull-left text-muted"></span>
 			    <span id="distance-1-value"></span>
 			    <span id="distance-1-max" class="pull-right text-muted"></span>
+                        <input id="end-1-input" type="text" class="form-control text-right tt-input typeahead" onchange="system_changed();" placeholder="To">
 		    </td>
 		    <td class="text-right" style="vertical-align:middle;"><b><span id="result-1-fatigue-after" style="font-size:140%;">&nbsp;</span></b></td>
 		    <td class="text-right" style="vertical-align:middle;"><b><span id="result-1-time" style="font-size:140%;">&nbsp;</span></b></td>
@@ -285,10 +286,51 @@
     <div style="font-size:70%; position:fixed; bottom:1px; left:5px; z-index:23;">Based on the <a href="http://community.eveonline.com/news/dev-blogs/phoebe-travel-change-update/">CCP devblog</a> released 30.10.2014 17:19</div>
     <div style="font-size:70%; position:fixed; bottom:1px; right:5px; z-index:23;">Brought to you by <a href="http://evewho.com/pilot/kiu+Nakamura">kiu Nakamura</a> / <a href="http://evewho.com/alli/Brave+Collective">Brave Collective</a></div>
 
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap3-typeahead.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-v4.0.5.js"></script>
+    <script type="text/javascript" src="js/jfc.js"></script>
+    <script type="text/javascript">
+        
+var systems = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  prefetch: 'systems.json'
+});
 
-    <script src="js/jfc.js"></script>
+var suggestion = Handlebars.compile('<div><strong>{{name}}</strong><span class="region">({{additional}})</span></div>');
+
+$('#start-1-input').typeahead(null, {
+  name: 'start-name',
+  display: 'name',
+  highlight: true,
+  source: systems,
+    templates: {
+    suggestion: suggestion
+  }
+});
+
+$('#end-1-input').typeahead(null, {
+  name: 'end-name',
+  display: 'name',
+  highlight: true,
+  source: systems,
+    templates: {
+    suggestion: suggestion
+  }
+});
+
+$('#test').typeahead(null, {
+  name: 'end-name',
+  display: 'name',
+  highlight: true,
+  source: systems,
+    templates: {
+    suggestion: suggestion
+  }
+});
+</script>
 
 </body>
 </html>

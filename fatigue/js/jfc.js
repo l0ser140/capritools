@@ -205,7 +205,7 @@ function recalc() {
 
     traveltime = 0;
     fatigue = getPreFatigue();
-
+    
     distance = refreshInputDistance('#distance-1', 0, maxrange);
     cooldown = Math.max(fatigue / 10, 1 + distance * (1 - modifier));
     fatigue = Math.max(fatigue, 10) * (1 + distance * (1 - modifier));
@@ -253,4 +253,33 @@ function recalc() {
 	    $("#result-" + i + "-time").html(toTime(traveltime));
 	}
     }
+}
+
+function slider_changed() {
+    $("#start-1-input").val("");
+    $("#end-1-input").val("");
+    distance = refreshInputDistance('#distance-1', 0, maxrange);
+    
+    recalc();
+    
+} 
+
+function system_changed() {
+    start = String($("#start-1-input").val());
+    end = String($("#end-1-input").val());
+    distance = refreshInputDistance('#distance-1', 0, maxrange);
+    
+    if (start && end) {
+        $.get( "range.php?start=" + start +"&end=" + end, function( data ) {
+            distance = Number(data);
+            if (data > maxrange) {
+                alert( "Data Loaded: " + distance );
+            } else {
+                $("#distance-1-input").val(distance);
+                recalc();
+            }
+        });
+    }
+    
+    recalc();
 }
