@@ -1,0 +1,28 @@
+.table tr td:nth-child(1) {
+  width: 2%;
+}
+.table tr td:nth-child(2) {
+  width: 9%;
+}
+.table tr td:nth-child(3) {
+  width: 20%;
+}
+.table tr td:nth-child(4) {
+  width: 14%;
+}
+.table tr td:nth-child(5) {
+  width: 27%;
+}
+.table tr td:nth-child(6) {
+  width: 14%;
+}
+.table tr td:nth-child(7) {
+  width: 14%;
+}
+.table tr:first-child td:nth-child(4) .form-inline {
+	width: 150%;
+	margin-left: -50%;
+}
+.table tr:first-child td:nth-child(4) .form-inline .form-group, .table tr:first-child td:nth-child(4) .form-inline .form-group .input-group {
+	display: block;
+}

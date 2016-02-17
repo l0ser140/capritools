@@ -11,7 +11,7 @@
     <title>EVE Tools - Fatigue Calculator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <?php include("../switcher.php"); ?>
-    <link rel="stylesheet" href="/dscan/css/custom.css">
+    <link rel="stylesheet" href="/fatigue/css/custom.css">
   </head>
 
 <body>
