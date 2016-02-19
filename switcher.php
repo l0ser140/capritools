@@ -9,7 +9,7 @@ if(isset($_GET['theme'])) {
 	} else {
 		$theme = $_COOKIE['theme'];
 	}
-	echo '<link rel="stylesheet" href="/css/'.$theme.'.min.css">';
+        echo '<link href="/css/'.$theme.'.min.css" rel="stylesheet" type="text/css"/>'.PHP_EOL;;
 }
 
 ?>

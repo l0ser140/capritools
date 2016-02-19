@@ -9,11 +9,13 @@
     <meta name="author" content="kiu Nakamura">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>EVE Tools - Fatigue Calculator</title>
-    <?php include("../switcher.php"); ?>
-    <link rel="stylesheet" href="/fatigue/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/fatigue/css/typeahead.css">
-    <link rel="stylesheet" href="/fatigue/css/custom.css">
+    <title>EVE Tools - Fatigue Calculator</title>    
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <?php// include("../switcher.php"); ?>
+    
+    <link href="css/typeahead.css" rel="stylesheet" type="text/css"/>
+    <link href="css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -22,39 +24,43 @@
 <br>
 <!-- Content -->
     <div class="container">
-	<span id="option-travel" style="font-size:140%;">
+	<div id="option-travel" style="font-size:140%;">
 	    <label>I travel by </label>
-	    <button id="option-travel-1" class="btn btn-default btn-sm" onclick="selectTravel = 1; readjust();"><b>using a Jumpbridge</b></button>
-	    <button id="option-travel-2" class="btn btn-default btn-sm" onclick="selectTravel = 2; readjust();"><b>jumping to a Cyno / being bridged by a Titan</b></button>
-	    <button id="option-travel-3" class="btn btn-default btn-sm" onclick="selectTravel = 3; readjust();"><b>jumping to a Covert Cyno / being bridged by a Black Ops</b></button>
-	</span>
-
-<br>
-
-	<span id="option-ship-covert" style="font-size:140%;" class="hide">
+            <div class="btn-group btn-group-sm ">
+                <button id="option-travel-1" class="btn btn-default" onclick="selectTravel = 1; readjust();"><b>using a Jumpbridge</b></button>
+                <button id="option-travel-2" class="btn btn-default" onclick="selectTravel = 2; readjust();"><b>jumping to a Cyno / being bridged by a Titan</b></button>
+                <button id="option-travel-3" class="btn btn-default" onclick="selectTravel = 3; readjust();"><b>jumping to a Covert Cyno / being bridged by a Black Ops</b></button>
+            </div>
+        </div>
+        
+	<div id="option-ship-covert" style="font-size:140%;" class="hide">
 	    <label>I am in a </label>
-	    <button id="option-ship-covert-1" class="btn btn-default btn-sm" onclick="selectShipCovert = 1; readjust();"><b>Black Ops, Covert Ops, Force Recon</b></button>
-	    <button id="option-ship-covert-2" class="btn btn-default btn-sm" onclick="selectShipCovert = 2; readjust();"><b>Blockade Runner</b></button>
-	</span>
+            <div class="btn-group btn-group-sm">
+                <button id="option-ship-covert-1" class="btn btn-default" onclick="selectShipCovert = 1; readjust();"><b>Black Ops, Covert Ops, Force Recon</b></button>
+                <button id="option-ship-covert-2" class="btn btn-default" onclick="selectShipCovert = 2; readjust();"><b>Blockade Runner</b></button>
+            </div>
+        </div>
 
-	<span id="option-ship" style="font-size:140%;" class="hide">
+	<div id="option-ship" style="font-size:140%;" class="hide">
 	    <label>I am in a </label>
-	    <button id="option-ship-1" class="btn btn-default btn-sm" onclick="selectShip = 1; readjust();"><b>Black Ops</b></button>
-	    <button id="option-ship-2" class="btn btn-default btn-sm" onclick="selectShip = 2; readjust();"><b>Jumpfreighter</b></button>
-	    <button id="option-ship-3" class="btn btn-default btn-sm" onclick="selectShip = 3; readjust();"><b>Standard-, Advanced-, Capital-Industrial, Freighter</b></button>
-	    <button id="option-ship-4" class="btn btn-default btn-sm" onclick="selectShip = 4; readjust();"><b>Everything else</b></button>
-	</span>
-
-<br>
-
-	<span id="option-jdc" style="font-size:140%;" class="hide">
+            <div class="btn-group btn-group-sm">
+                <button id="option-ship-1" class="btn btn-default" onclick="selectShip = 1; readjust();"><b>Black Ops</b></button>
+                <button id="option-ship-2" class="btn btn-default" onclick="selectShip = 2; readjust();"><b>Jumpfreighter</b></button>
+                <button id="option-ship-3" class="btn btn-default" onclick="selectShip = 3; readjust();"><b>Standard-, Advanced-, Capital-Industrial, Freighter</b></button>
+                <button id="option-ship-4" class="btn btn-default" onclick="selectShip = 4; readjust();"><b>Everything else</b></button>
+            </div>
+        </div>
+        
+	<div id="option-jdc" style="font-size:140%;" class="hide">
 	    <label>I or the bridging pilot have </label>
-	    <button id="option-jdc-1" class="btn btn-default btn-sm" onclick="selectJdc = 1; readjust();"><b>JDC I</b></button>
-	    <button id="option-jdc-2" class="btn btn-default btn-sm" onclick="selectJdc = 2; readjust();"><b>JDC II</b></button>
-	    <button id="option-jdc-3" class="btn btn-default btn-sm" onclick="selectJdc = 3; readjust();"><b>JDC III</b></button>
-	    <button id="option-jdc-4" class="btn btn-default btn-sm" onclick="selectJdc = 4; readjust();"><b>JDC IV</b></button>
-	    <button id="option-jdc-5" class="btn btn-default btn-sm" onclick="selectJdc = 5; readjust();"><b>JDC V</b></button>
-	</span>
+            <div class="btn-group btn-group-sm">
+                <button id="option-jdc-1" class="btn btn-default" onclick="selectJdc = 1; readjust();"><b>JDC I</b></button>
+                <button id="option-jdc-2" class="btn btn-default" onclick="selectJdc = 2; readjust();"><b>JDC II</b></button>
+                <button id="option-jdc-3" class="btn btn-default" onclick="selectJdc = 3; readjust();"><b>JDC III</b></button>
+                <button id="option-jdc-4" class="btn btn-default" onclick="selectJdc = 4; readjust();"><b>JDC IV</b></button>
+                <button id="option-jdc-5" class="btn btn-default" onclick="selectJdc = 5; readjust();"><b>JDC V</b></button>
+            </div>
+	</div>
 
 	<hr>
 
@@ -70,7 +76,7 @@
 	<br>
 	<br>
 
-	<table class="table table-hover table-striped">
+	<table class="table table-hover table-striped table-bordered">
 	    <thead>
 		<tr>
 		    <th>Jump<br>&nbsp;</th>
@@ -100,7 +106,8 @@
 		    <td class="text-center">
 			<br>
                         <input id="start-1-input" type="text" class="form-control text-right tt-input typeahead" onchange="system_changed();" placeholder="From">
-			<input id="distance-1-input" style="display: inline;" onchange="slider_changed();"  type="range" min="0" max="0" step="0.01">
+			<input id="test" class="form-control typeahead" type="text" placeholder="States of USA">
+                        <input id="distance-1-input" style="display: inline;" onchange="slider_changed();"  type="range" min="0" max="0" step="0.01">
 			    <span id="distance-1-min" class="pull-left text-muted"></span>
 			    <span id="distance-1-value"></span>
 			    <span id="distance-1-max" class="pull-right text-muted"></span>
@@ -286,51 +293,50 @@
     <div style="font-size:70%; position:fixed; bottom:1px; left:5px; z-index:23;">Based on the <a href="http://community.eveonline.com/news/dev-blogs/phoebe-travel-change-update/">CCP devblog</a> released 30.10.2014 17:19</div>
     <div style="font-size:70%; position:fixed; bottom:1px; right:5px; z-index:23;">Brought to you by <a href="http://evewho.com/pilot/kiu+Nakamura">kiu Nakamura</a> / <a href="http://evewho.com/alli/Brave+Collective">Brave Collective</a></div>
 
-    <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap3-typeahead.min.js"></script>
-    <script type="text/javascript" src="js/handlebars-v4.0.5.js"></script>
-    <script type="text/javascript" src="js/jfc.js"></script>
-    <script type="text/javascript">
+    <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/typeahead.bundle.js" type="text/javascript"></script>
+    <script src="js/handlebars-v4.0.5.js" type="text/javascript"></script>
+    <script src="js/jfc.js" type="text/javascript"></script>
+    <script type="text/javascript"> 
+        var systems = new Bloodhound({
+          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          prefetch: 'systems.json'
+        });
+
+        var suggestion = Handlebars.compile('<div><strong>{{name}}</strong><span class="region">({{additional}})</span></div>');
+
+        $('#start-1-input').typeahead(null, {
+          name: 'end-name',
+          display: 'name',
+          highlight: true,
+          source: systems,
+            templates: {
+            suggestion: suggestion
+          }
+        });
         
-var systems = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-  queryTokenizer: Bloodhound.tokenizers.whitespace,
-  prefetch: 'systems.json'
-});
+        $('#end-1-input').typeahead(null, {
+          name: 'end-name',
+          display: 'name',
+          highlight: true,
+          source: systems,
+            templates: {
+            suggestion: suggestion
+          }
+        });
 
-var suggestion = Handlebars.compile('<div><strong>{{name}}</strong><span class="region">({{additional}})</span></div>');
-
-$('#start-1-input').typeahead(null, {
-  name: 'start-name',
-  display: 'name',
-  highlight: true,
-  source: systems,
-    templates: {
-    suggestion: suggestion
-  }
-});
-
-$('#end-1-input').typeahead(null, {
-  name: 'end-name',
-  display: 'name',
-  highlight: true,
-  source: systems,
-    templates: {
-    suggestion: suggestion
-  }
-});
-
-$('#test').typeahead(null, {
-  name: 'end-name',
-  display: 'name',
-  highlight: true,
-  source: systems,
-    templates: {
-    suggestion: suggestion
-  }
-});
-</script>
+        $('#test').typeahead(null, {
+          name: 'end-name',
+          display: 'name',
+          highlight: true,
+          source: systems,
+            templates: {
+            suggestion: suggestion
+          }
+        });
+    </script>
 
 </body>
 </html>

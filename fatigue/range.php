@@ -9,18 +9,13 @@ function formatstr($str)
         return $str;
     }
     
-if (!$_GET['start'] OR !$_GET['end']) {
-    echo 0;
-    exit();
-}
-$start = formatstr($_GET['start']);
-$end = formatstr($_GET['end']);
+$start = filter_input(INPUT_GET, 'start', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$end = filter_input(INPUT_GET, 'end', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 $mysqli = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
 
-/* проверка соединения */
 if ($mysqli->connect_errno) {
-    printf("Не удалось подключиться: %s\n", $mysqli->connect_error);
+    printf("Connection error: %s\n", $mysqli->connect_error);
     exit();
 }
 
@@ -45,7 +40,6 @@ if ($result = $mysqli->query("SELECT * FROM `mapSolarSystems` WHERE solarSystemN
 }
 
 $end = $mysqli->real_escape_string($end);
-/* Select запросы возвращают результирующий набор */
 if ($result = $mysqli->query("SELECT * FROM `mapSolarSystems` WHERE solarSystemName='$end'")) {
     $row_cnt = $result->num_rows;
     if($row_cnt != 1)
@@ -68,5 +62,6 @@ if ($result = $mysqli->query("SELECT * FROM `mapSolarSystems` WHERE solarSystemN
 $mysqli->close();
 
 $distance = sqrt(pow($start_row['x']-$end_row['x'], 2) + pow($start_row['y']-$end_row['y'], 2) + pow($start_row['z']-$end_row['z'], 2)) / 9460730472580800;
+
 echo $distance;
 ?>
